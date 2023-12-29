@@ -5,7 +5,7 @@ After=multi-user.target
 [Service]
 Type=simple
 User=pi
-ExecStart=/usr/bin/python3 #PYTHON_SCRIPT_PATH#
+ExecStart=./videolooper.sh
 WorkingDirectory=/home/pi
 
 [Install]
