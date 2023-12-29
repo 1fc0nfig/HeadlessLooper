@@ -11,6 +11,24 @@ fi
 # Change directory to HeadlessLooper
 cd HeadlessLooper
 
+sudo git pull
+
+SCRIPTPATH=$(pwd)"/videolooper.py"
+
 sudo mkdir /boot/Videos
+
+# change the service file to point to the correct path
+sudo sed -i "s|ExecStart=.*|ExecStart=/usr/bin/python3 $(pwd)"/videolooper.py"|g" headlesslooper.service
+sudo sed -i "s|WorkingDirectory=.*|WorkingDirectory=$(pwd)|g" headlesslooper.service
+
+# Check for existing service file
+# If there is one, remove it
+if [ -f "/etc/systemd/system/headlesslooper.service" ]; then
+    sudo systemctl stop headlesslooper.service
+    sudo systemctl disable headlesslooper.service
+    sudo rm /etc/systemd/system/headlesslooper.service
+fi
+
 sudo cp headlesslooper.service /etc/systemd/system/headlesslooper.service
 sudo systemctl enable headlesslooper.service
+sudo systemctl start headlesslooper.service
