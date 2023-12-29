@@ -15,6 +15,12 @@ if not media_files:
     # Use the "Media not found" image if no media files are found
     media_paths = no_media_image
 else:
+    # Clear the Videos directory in current directory
+    subprocess.run(['rm', '-rf', 'Videos/*'])
+    # Copy all media files to Videos directory in current directory
+    subprocess.run(['cp', '-r', media_directory, 'Videos'])
+    # Change the media directory to the Videos directory in current directory
+    media_directory = 'Videos'
     # Create a string with the paths of all media files, separated by spaces
     media_paths = ' '.join([os.path.join(media_directory, f) for f in media_files])
 
