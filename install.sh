@@ -11,9 +11,12 @@ fi
 # Change directory to HeadlessLooper
 cd HeadlessLooper
 sudo git pull
+
 sudo mkdir /boot/Videos
+sudo chmod +x videolooper.sh
 
 # change the service file to point to the correct path
+sudo sed -i "s|ExecStart=.*|ExecStart=$(pwd)/videolooper.sh|g" headlesslooper.service
 sudo sed -i "s|WorkingDirectory=.*|WorkingDirectory=$(pwd)|g" headlesslooper.service
 
 # Check for existing service file

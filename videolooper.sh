@@ -22,10 +22,10 @@ if [ ${#media_files[@]} -eq 0 ]; then
     media_paths=$no_media_image
 else
     # Clear the Videos directory in current directory
-    rm -rf Videos/*
+    sudo rm -rf Videos/*
 
     # Copy all media files to Videos directory in current directory
-    cp -r "$media_directory"/* Videos/
+    sudo cp -r "$media_directory"/* Videos/
 
     # Change the media directory to the Videos directory in current directory
     media_directory="Videos"
@@ -48,4 +48,4 @@ vlc_command=(
 )
 
 # Run the VLC command
-"${vlc_command[@]}"
+"${vlc_command[@]}" &
