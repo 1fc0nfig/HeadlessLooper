@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-User=root
+User=pi
 ExecStart=/usr/bin/python3 #PYTHON_SCRIPT_PATH#
 WorkingDirectory=/home/pi
 
