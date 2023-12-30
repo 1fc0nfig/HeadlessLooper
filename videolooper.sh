@@ -21,11 +21,9 @@ if [ ${#media_files[@]} -eq 0 ]; then
     # Use the "Media not found" image if no media files are found
     media_paths=$no_media_image
 else
-    # Create a string with absolute paths of all media files, separated by spaces
-    media_paths=""
-    for media_file in "${media_files[@]}"; do
-        media_paths+=" $media_file"
-    done
+    # Create a string with absolute paths of all media files, separated by spaces, wrapped in quotes
+    media_paths=$(printf " \"%s\"" "${media_files[@]}")
+    echo $media_paths
 fi
 
 # VLC command
@@ -38,5 +36,7 @@ vlc_command=(
     $media_paths
 )
 
+echo "${vlc_command[@]}"
+
 # Run the VLC command
-"${vlc_command[@]}" &
+#"${vlc_command[@]}" &

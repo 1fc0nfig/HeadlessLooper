@@ -9,7 +9,6 @@ sudo apt install -y git vlc
 # Check if there is a directory called "HeadlessLooper" in currect directory
 # If not, clone the repo
 if [ ! -d "HeadlessLooper" ]; then
-    echo "Cloning HeadlessLooper repo..."
     git clone https://github.com/1fc0nfig/HeadlessLooper.git
     CLONED=true
 fi
