@@ -1,13 +1,9 @@
 #/bin/bash
-
-cd
-clear
-echo "Updating system..."
-sudo apt update -y
-sudo apt upgrade -y
-
+cd ~
 clear
 echo "Installing dependencies..."
+sudo apt update -y
+sudo apt upgrade -y
 sudo apt install -y git vlc
 
 # Check if there is a directory called "HeadlessLooper" in currect directory
@@ -15,14 +11,19 @@ sudo apt install -y git vlc
 if [ ! -d "HeadlessLooper" ]; then
     echo "Cloning HeadlessLooper repo..."
     git clone https://github.com/1fc0nfig/HeadlessLooper.git
+    CLONED=true
 fi
-
 
 # Change directory to HeadlessLooper
 cd HeadlessLooper
 
-echo "Updating HeadlessLooper..."
-sudo git pull
+# If the repo was just cloned, we don't need to update it
+if [ "$CLONED" = true ]; then
+    echo "Installing HeadlessLooper..."
+else
+    echo "Updating HeadlessLooper..."
+    sudo git pull
+fi
 
 sudo chmod +x videolooper.sh
 
@@ -47,3 +48,7 @@ sudo systemctl enable headlesslooper.service
 sudo systemctl start headlesslooper.service
 
 echo "Done!"
+
+# TODO: For fresh install - check if the disk is partitioned correctly, create a mounting point at /mnt/MEDIA,
+# edit fstab for automounting, mount, extend the rootfs to fill the disk, reboot
+# 
