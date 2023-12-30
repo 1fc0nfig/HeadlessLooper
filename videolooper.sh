@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the path to the directory containing your videos and images
-media_directory="/boot/Videos"
+media_directory="/mnt/MEDIA"
 
 # Path to the "Media not found" image
 no_media_image="media-not-found.jpg"
@@ -21,19 +21,10 @@ if [ ${#media_files[@]} -eq 0 ]; then
     # Use the "Media not found" image if no media files are found
     media_paths=$no_media_image
 else
-    # Clear the Videos directory in current directory
-    sudo rm -rf Videos/*
-
-    # Copy all media files to Videos directory in current directory
-    sudo cp -r "$media_directory"/* Videos/
-
-    # Change the media directory to the Videos directory in current directory
-    media_directory="Videos"
-
-    # Create a string with the paths of all media files, separated by spaces
+    # Create a string with absolute paths of all media files, separated by spaces
     media_paths=""
-    for f in "${media_files[@]}"; do
-        media_paths+="$media_directory/$(basename "$f") "
+    for media_file in "${media_files[@]}"; do
+        media_paths+=" $media_file"
     done
 fi
 

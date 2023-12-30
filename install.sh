@@ -1,3 +1,6 @@
+#/bin/bash
+
+cd
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt install -y git vlc
@@ -8,11 +11,11 @@ if [ ! -d "HeadlessLooper" ]; then
     git clone https://github.com/1fc0nfig/HeadlessLooper.git
 fi
 
+
 # Change directory to HeadlessLooper
 cd HeadlessLooper
 sudo git pull
 
-sudo mkdir /boot/Videos
 sudo chmod +x videolooper.sh
 
 # change the service file to point to the correct path
