@@ -19,12 +19,11 @@ done
 # Check if there are any media files
 if [ ${#media_files[@]} -eq 0 ]; then
     # Use the "Media not found" image if no media files are found
-    media_paths=$no_media_image
-else
-    # Create a string with absolute paths of all media files, separated by spaces, wrapped in quotes
-    media_paths=$(printf " \"%s\"" "${media_files[@]}")
-    echo $media_paths
+    media_files=("$no_media_image")
 fi
+
+# Echo the media files for debugging
+echo "Media files to play: ${media_files[*]}"
 
 # VLC command
 vlc_command=(
@@ -33,10 +32,11 @@ vlc_command=(
     --no-osd 
     --loop 
     --fullscreen 
-    $media_paths
+    "${media_files[@]}"
 )
 
-echo "${vlc_command[@]}"
+# Echo the full VLC command for debugging
+echo "Running command: ${vlc_command[*]}"
 
-# Run the VLC command
-#"${vlc_command[@]}" &
+# Run the VLC command in the background
+"${vlc_command[@]}" &
