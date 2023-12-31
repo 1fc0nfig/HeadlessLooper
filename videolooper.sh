@@ -39,4 +39,4 @@ vlc_command=(
 echo "Running command: ${vlc_command[*]}"
 
 # Run the VLC command in the background
-"${vlc_command[@]}" &
+"${vlc_command[@]}"
